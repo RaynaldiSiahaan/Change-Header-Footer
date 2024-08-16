@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process DOCX Files</title>
+</head>
+<body>
+    <h1>DOCX Files in the Zip</h1>
+    <ul>
+        {% for file in docx_files %}
+            <li>{{ file }}</li>
+        {% endfor %}
+    </ul>
+    <form method="POST" action="{{ url_for('process') }}">
+        <input type="hidden" name="zip_filename" value="{{ zip_filename }}">
+        
+        <h2>Header Replacement</h2>
+        <div id="header-fields">
+            <div class="header-field">
+                <label for="header_element_type">Select Element Type:</label>
+                <select name="header_element_type" class="header-element-type">
+                    <option value="Paragraph">Paragraph</option>
+                    <option value="Table">Table</option>
+                </select>
+                <br>
+                <label for="header_old_text">Old Text:</label>
+                <input type="text" name="header_old_text" class="header-old-text">
+                <br>
+                <label for="header_new_text">New Text:</label>
+                <input type="text" name="header_new_text" class="header-new-text">
+                <br>
+                <label for="header_font_name">Font Name:</label>
+                <select name="header_font_name" class="header-font-name">
+                    <option value="Calibri">Calibri</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Sans-serif">Sans-serif</option>
+                </select>
+                <br>
+                <label for="header_font_size">Font Size:</label>
+                <input type="number" name="header_font_size" class="header-font-size" value="11">
+                <br>
+                <label for="header_bold">Bold:</label>
+                <input type="checkbox" name="header_bold" class="header-bold">
+                <br><br>
+            </div>
+        </div>
+        <button type="button" onclick="addHeaderField()">Add More Fields</button>
+        
+        <h2>Footer Replacement</h2>
+        <div id="footer-fields">
+            <div class="footer-field">
+                <label for="footer_element_type">Select Element Type:</label>
+                <select name="footer_element_type" class="footer-element-type">
+                    <option value="Paragraph">Paragraph</option>
+                    <option value="Table">Table</option>
+                </select>
+                <br>
+                <label for="footer_old_text">Old Text:</label>
+                <input type="text" name="footer_old_text" class="footer-old-text">
+                <br>
+                <label for="footer_new_text">New Text:</label>
+                <input type="text" name="footer_new_text" class="footer-new-text">
+                <br>
+                <label for="footer_font_name">Font Name:</label>
+                <select name="footer_font_name" class="footer-font-name">
+                    <option value="Calibri">Calibri</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Sans-serif">Sans-serif</option>
+                </select>
+                <br>
+                <label for="footer_font_size">Font Size:</label>
+                <input type="number" name="footer_font_size" class="footer-font-size" value="11">
+                <br>
+                <label for="footer_bold">Bold:</label>
+                <input type="checkbox" name="footer_bold" class="footer-bold">
+                <br><br>
+            </div>
+        </div>
+        <button type="button" onclick="addFooterField()">Add More Fields</button>
+
+        <button type="submit">Process Files</button>
+    </form>
+
+    <script>
+        function addHeaderField() {
+            const headerFieldHTML = `
+            <div class="header-field">
+                <label for="header_element_type">Select Element Type:</label>
+                <select name="header_element_type" class="header-element-type">
+                    <option value="Paragraph">Paragraph</option>
+                    <option value="Table">Table</option>
+                </select>
+                <br>
+                <label for="header_old_text">Old Text:</label>
+                <input type="text" name="header_old_text" class="header-old-text">
+                <br>
+                <label for="header_new_text">New Text:</label>
+                <input type="text" name="header_new_text" class="header-new-text">
+                <br>
+                               <label for="header_font_name">Font Name:</label>
+                <select name="header_font_name" class="header-font-name">
+                    <option value="Calibri">Calibri</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Sans-serif">Sans-serif</option>
+                </select>
+                <br>
+                <label for="header_font_size">Font Size:</label>
+                <input type="number" name="header_font_size" class="header-font-size" value="11">
+                <br>
+                <label for="header_bold">Bold:</label>
+                <input type="checkbox" name="header_bold" class="header-bold">
+                <br><br>
+            </div>
+            `;
+            document.getElementById('header-fields').insertAdjacentHTML('beforeend', headerFieldHTML);
+        }
+
+        function addFooterField() {
+            const footerFieldHTML = `
+            <div class="footer-field">
+                <label for="footer_element_type">Select Element Type:</label>
+                <select name="footer_element_type" class="footer-element-type">
+                    <option value="Paragraph">Paragraph</option>
+                    <option value="Table">Table</option>
+                </select>
+                <br>
+                <label for="footer_old_text">Old Text:</label>
+                <input type="text" name="footer_old_text" class="footer-old-text">
+                <br>
+                <label for="footer_new_text">New Text:</label>
+                <input type="text" name="footer_new_text" class="footer-new-text">
+                <br>
+                <label for="footer_font_name">Font Name:</label>
+                <select name="footer_font_name" class="footer-font-name">
+                    <option value="Calibri">Calibri</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Sans-serif">Sans-serif</option>
+                </select>
+                <br>
+                <label for="footer_font_size">Font Size:</label>
+                <input type="number" name="footer_font_size" class="footer-font-size" value="11">
+                <br>
+                <label for="footer_bold">Bold:</label>
+                <input type="checkbox" name="footer_bold" class="footer-bold">
+                <br><br>
+            </div>
+            `;
+            document.getElementById('footer-fields').insertAdjacentHTML('beforeend', footerFieldHTML);
+        }
+    </script>
+</body>
+</html>
+
