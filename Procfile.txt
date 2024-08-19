@@ -1,1 +1,1 @@
-web: gunicorn FlaskWeb:app
+web: npm run build:css && gunicorn FlaskWeb:app
