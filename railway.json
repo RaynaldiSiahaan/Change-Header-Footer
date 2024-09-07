@@ -5,6 +5,7 @@
         "nixpacksConfig": {
             "install": [
                 "pip install -r requirements.txt",
+                "pip install gunicorn",
                 "npm install"
             ],
             "build": [
