@@ -8,7 +8,7 @@ from docx.shared import Pt
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['PROCESSED_FOLDER'] = 'processed'
 
