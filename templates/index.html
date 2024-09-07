@@ -3,13 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+    .nav-link{
+        font-family:'Courier New', Courier, monospace;
+        font-size:1.3vw;
+        font-weight:bold;
+        margin-left: 3rem;
+        margin-right: 3rem;
+    }
+        .btn {
+  padding: .45rem 1.5rem .35rem;
+}
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #c471f5;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(196, 113, 245, 1), rgba(250, 113, 205, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(196, 113, 245, 1), rgba(250, 113, 205, 1))
+}
+    </style>
     <title>Upload Zip File</title>
 </head>
-<body>
-    <h1>Upload a Zip File with .docx Files</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="zip_file" accept=".zip">
-        <button type="submit">Upload File</button>
-    </form>
+<body class=" h-100 text-center text-white bg-dark">
+    <!-- Navbar -->
+
+        <header>
+<nav class="navbar navbar-expand-lg sticky-top navbar-light gradient-custom">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Navbar brand -->
+      <a class="navbar-brand" href="#">
+        <img src="https://pbs.twimg.com/media/FkAH3MVaAAAu4AB?format=jpg&name=small" height="30" alt="" loading="lazy" />
+      </a>
+  
+      <!-- Toggle button -->
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"> 
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Function 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Function 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Function 3</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Function 4</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+  
+        
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+</header>  <!-- Navbar -->
+            <div class="col">
+                <div class = "container position-relative">
+                    <div class = "row justify-content-center pt-4">
+                        <h1>Upload a Zip File with .docx Files</h1>
+            
+                        <div class="col-xl-6">
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="file" name="zip_file" accept=".zip">
+                    <button type="submit">Upload File</button>
+                </form>
+                </div>
+                </div>
+                </div>  
+            
+            </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

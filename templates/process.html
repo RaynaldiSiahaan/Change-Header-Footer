@@ -3,35 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <title>Process DOCX Files</title>
+    <style>
+        .mainpart{
+            margin-left:3%;
+        }
+        .lgi {
+            width: 60%
+        }
+        .shi{
+            width: 10%
+        }
+        .nav-link{
+            font-family:'Courier New', Courier, monospace;
+            font-size:1.3vw;
+            font-weight:bold;
+            margin-left: 3rem;
+            margin-right: 3rem;
+        }
+            .btn {
+      padding: .45rem 1.5rem .35rem;
+    }
+    
+    .gradient-custom {
+      /* fallback for old browsers */
+      background: #c471f5;
+    
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(to right, rgba(196, 113, 245, 1), rgba(250, 113, 205, 1));
+    
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: linear-gradient(to right, rgba(196, 113, 245, 1), rgba(250, 113, 205, 1))
+    }
+        </style>
 </head>
-<body>
-    <h1>DOCX Files in the Zip</h1>
+<body class=" h-100  text-white bg-dark">
+    <!-- Navbar -->
+
+    <header>
+        <nav class="navbar navbar-expand-lg sticky-top navbar-light gradient-custom">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+              <!-- Navbar brand -->
+              <a class="navbar-brand" href="#">
+                <img src="https://pbs.twimg.com/media/FkAH3MVaAAAu4AB?format=jpg&name=small" height="30" alt="" loading="lazy" />
+              </a>
+          
+              <!-- Toggle button -->
+              <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+              </button>
+          
+              <!-- Collapsible wrapper -->
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item"> 
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Function 1</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Function 2</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Function 3</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Function 4</a>
+                  </li>
+                </ul>
+                <!-- Left links -->
+          
+                
+              </div>
+              <!-- Collapsible wrapper -->
+            </div>
+            <!-- Container wrapper -->
+          </nav>
+        </header>  <!-- Navbar -->
+    <h1 class="text-center my-3"> DOCX Files in the Zip</h1>
     <ul>
         {% for file in docx_files %}
             <li>{{ file }}</li>
         {% endfor %}
     </ul>
+    <div class="mainpart">
     <form method="POST" action="{{ url_for('process') }}">
         <input type="hidden" name="zip_filename" value="{{ zip_filename }}">
-        
         <h2>Header Replacement</h2>
         <div id="header-fields">
-            <div class="header-field">
+            <div class="header-field form-group">
                 <label for="header_element_type">Select Element Type:</label>
-                <select name="header_element_type" class="header-element-type">
+                <select name="header_element_type" class="header-element-type form-control shi">
                     <option value="Paragraph">Paragraph</option>
                     <option value="Table">Table</option>
                 </select>
                 <br>
                 <label for="header_old_text">Old Text:</label>
-                <input type="text" name="header_old_text" class="header-old-text">
+                <input type="text" name="header_old_text" class="header-old-text form-control lgi">
                 <br>
                 <label for="header_new_text">New Text:</label>
-                <input type="text" name="header_new_text" class="header-new-text">
+                <input type="text" name="header_new_text" class="header-new-text form-control lgi">
                 <br>
                 <label for="header_font_name">Font Name:</label>
-                <select name="header_font_name" class="header-font-name">
+                <select name="header_font_name" class="header-font-name  form-select shi">
                     <option value="Calibri">Calibri</option>
                     <option value="Times New Roman">Times New Roman</option>
                     <option value="Arial">Arial</option>
@@ -40,32 +120,33 @@
                 </select>
                 <br>
                 <label for="header_font_size">Font Size:</label>
-                <input type="number" name="header_font_size" class="header-font-size" value="11">
+                <input type="number" name="header_font_size" class="header-font-size form-control shi" value="11">
                 <br>
-                <label for="header_bold">Bold:</label>
-                <input type="checkbox" name="header_bold" class="header-bold">
+                <input type="checkbox" name="header_bold" class="header-bold form-check-input">
+
+                <label for="header_bold">Bold</label>
                 <br><br>
             </div>
         </div>
         <button type="button" onclick="addHeaderField()">Add More Fields</button>
         
-        <h2>Footer Replacement</h2>
+        <h2 class="my-3">Footer Replacement</h2>
         <div id="footer-fields">
-            <div class="footer-field">
+            <div class="footer-field form-group">
                 <label for="footer_element_type">Select Element Type:</label>
-                <select name="footer_element_type" class="footer-element-type">
+                <select name="footer_element_type" class="footer-element-type form-control shi">
                     <option value="Paragraph">Paragraph</option>
                     <option value="Table">Table</option>
                 </select>
                 <br>
                 <label for="footer_old_text">Old Text:</label>
-                <input type="text" name="footer_old_text" class="footer-old-text">
+                <input type="text" name="footer_old_text" class="footer-old-text form-control lgi">
                 <br>
                 <label for="footer_new_text">New Text:</label>
-                <input type="text" name="footer_new_text" class="footer-new-text">
+                <input type="text" name="footer_new_text" class="footer-new-text form-control lgi">
                 <br>
                 <label for="footer_font_name">Font Name:</label>
-                <select name="footer_font_name" class="footer-font-name">
+                <select name="footer_font_name" class="footer-font-name form-input shi">
                     <option value="Calibri">Calibri</option>
                     <option value="Times New Roman">Times New Roman</option>
                     <option value="Arial">Arial</option>
@@ -74,10 +155,11 @@
                 </select>
                 <br>
                 <label for="footer_font_size">Font Size:</label>
-                <input type="number" name="footer_font_size" class="footer-font-size" value="11">
+                <input type="number" name="footer_font_size" class="footer-font-size form-control shi" value="11">
                 <br>
+                <input type="checkbox" name="footer_bold" class="footer-bold form-check-input">
+
                 <label for="footer_bold">Bold:</label>
-                <input type="checkbox" name="footer_bold" class="footer-bold">
                 <br><br>
             </div>
         </div>
@@ -85,25 +167,27 @@
 
         <button type="submit">Process Files</button>
     </form>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <script>
         function addHeaderField() {
             const headerFieldHTML = `
-            <div class="header-field">
+            <div class="header-field form-group">
                 <label for="header_element_type">Select Element Type:</label>
-                <select name="header_element_type" class="header-element-type">
+                <select name="header_element_type" class="header-element-type form-control shi">
                     <option value="Paragraph">Paragraph</option>
                     <option value="Table">Table</option>
                 </select>
                 <br>
                 <label for="header_old_text">Old Text:</label>
-                <input type="text" name="header_old_text" class="header-old-text">
+                <input type="text" name="header_old_text" class="header-old-text form-control lgi">
                 <br>
                 <label for="header_new_text">New Text:</label>
-                <input type="text" name="header_new_text" class="header-new-text">
+                <input type="text" name="header_new_text" class="header-new-text form-control lgi">
                 <br>
-                               <label for="header_font_name">Font Name:</label>
-                <select name="header_font_name" class="header-font-name">
+                <label for="header_font_name">Font Name:</label>
+                <select name="header_font_name" class="header-font-name  form-select shi">
                     <option value="Calibri">Calibri</option>
                     <option value="Times New Roman">Times New Roman</option>
                     <option value="Arial">Arial</option>
@@ -112,10 +196,11 @@
                 </select>
                 <br>
                 <label for="header_font_size">Font Size:</label>
-                <input type="number" name="header_font_size" class="header-font-size" value="11">
+                <input type="number" name="header_font_size" class="header-font-size form-control shi" value="11">
                 <br>
-                <label for="header_bold">Bold:</label>
-                <input type="checkbox" name="header_bold" class="header-bold">
+                <input type="checkbox" name="header_bold" class="header-bold form-check-input">
+
+                <label for="header_bold">Bold</label>
                 <br><br>
             </div>
             `;
@@ -124,21 +209,21 @@
 
         function addFooterField() {
             const footerFieldHTML = `
-            <div class="footer-field">
+            <div class="footer-field form-group">
                 <label for="footer_element_type">Select Element Type:</label>
-                <select name="footer_element_type" class="footer-element-type">
+                <select name="footer_element_type" class="footer-element-type form-control shi">
                     <option value="Paragraph">Paragraph</option>
                     <option value="Table">Table</option>
                 </select>
                 <br>
                 <label for="footer_old_text">Old Text:</label>
-                <input type="text" name="footer_old_text" class="footer-old-text">
+                <input type="text" name="footer_old_text" class="footer-old-text form-control lgi">
                 <br>
                 <label for="footer_new_text">New Text:</label>
-                <input type="text" name="footer_new_text" class="footer-new-text">
+                <input type="text" name="footer_new_text" class="footer-new-text form-control lgi">
                 <br>
                 <label for="footer_font_name">Font Name:</label>
-                <select name="footer_font_name" class="footer-font-name">
+                <select name="footer_font_name" class="footer-font-name form-input shi">
                     <option value="Calibri">Calibri</option>
                     <option value="Times New Roman">Times New Roman</option>
                     <option value="Arial">Arial</option>
@@ -147,10 +232,11 @@
                 </select>
                 <br>
                 <label for="footer_font_size">Font Size:</label>
-                <input type="number" name="footer_font_size" class="footer-font-size" value="11">
+                <input type="number" name="footer_font_size" class="footer-font-size form-control shi" value="11">
                 <br>
+                <input type="checkbox" name="footer_bold" class="footer-bold form-check-input">
+
                 <label for="footer_bold">Bold:</label>
-                <input type="checkbox" name="footer_bold" class="footer-bold">
                 <br><br>
             </div>
             `;
